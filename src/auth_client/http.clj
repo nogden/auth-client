@@ -7,7 +7,7 @@
 (defn- request [http-client
                 {:keys [authenticate?]
                  :as   request}
-               callback]
+                callback]
   (http/request (if authenticate?
                   (if-let [authenticator (:authenticator http-client)]
                     (authenticated authenticator request)
@@ -33,6 +33,7 @@
 (defhttp head)
 (defhttp patch)
 (defhttp delete)
+(defhttp options)
 
 (defrecord Client [authenticator])
 
