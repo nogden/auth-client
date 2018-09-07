@@ -13,7 +13,13 @@
 (def http-client (http/client :authenticator (auth/header-token-authenticator token-store)))
 
 (deftest token-is-not-added-to-regular-requests
-  (is (-> (http/get http-client "http://google.com")
+  (is (-> (http/get http-client "http://example.com")
           deref
           (get-in [:opts :headers "Authentication"] :auth-header-not-present)
           (= :auth-header-not-present))))
+
+(deftest token-is-added-to-authenticated-request
+  (is (-> (http/get http-client "http://example.com" {:authenticate? true})
+          deref
+          (get-in [:opts :headers "Authentication"])
+          (= token))))
