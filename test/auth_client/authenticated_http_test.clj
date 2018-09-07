@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [auth-client.fixtures :as fixtures]
             [auth-client.http :as http]
-            [auth-client.authentication :as auth]))
+            [auth-client.header-token-scheme :as auth]))
 
 (use-fixtures :once fixtures/use-fake-http-calls)
 
@@ -10,7 +10,7 @@
 
 (def token-store (auth/token-store token))
 
-(def http-client (http/client :authenticator (auth/header-token-authenticator token-store)))
+(def http-client (http/client :authenticator (auth/authenticator token-store)))
 
 (deftest token-is-not-added-to-regular-requests
   (is (-> (http/get http-client "http://example.com")
