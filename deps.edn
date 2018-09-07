@@ -1,3 +1,9 @@
-{:deps {org.clojure/core.async {:mvn/version "0.4.474"}
-        http-kit               {:mvn/version "2.3.0"}
-        http-kit.fake          {:mvn/version "0.2.1"}}}
+{:deps    {org.clojure/core.async    {:mvn/version "0.4.474"}
+           org.clojure/tools.logging {:mvn/version "0.4.1"}
+           http-kit                  {:mvn/version "2.3.0"}
+           http-kit.fake             {:mvn/version "0.2.1"}}
+ :aliases {:test {:extra-paths ["test"]
+                  :extra-deps  {com.cognitect/test-runner
+                                {:git/url "https://github.com/cognitect-labs/test-runner.git"
+                                 :sha     "3cb0a9daf1cb746259dc8309b218f9211ad3b33b"}}
+                  :main-opts   ["-m" "cognitect.test-runner"]}}}
