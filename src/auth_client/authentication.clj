@@ -1,5 +1,5 @@
 (ns auth-client.authentication
-  "Facilities for authenticated requests and secret management"
+  "Authenticated requests and secret management"
   (:require [auth-client.http :as http]
             [auth-client.protocols :as proto]
             [clojure.core.async :as async]
@@ -11,9 +11,11 @@
   [http-client authenticator]
   (reify
     proto/AsyncHttpClient
-    (proto/request [this request callback]
+    (proto/request [this {:keys [authenticate?] :as request} callback]
       (proto/request http-client
-                     (proto/authenticated authenticator request)
+                     (if authenticate?
+                       (proto/authenticated authenticator request)
+                       request)
                      callback))))
 
 (defrecord AuthenticationService [comms]

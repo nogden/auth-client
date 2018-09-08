@@ -3,13 +3,11 @@
             [auth-client.fixtures :as fixtures]
             [auth-client.http :as http]
             [auth-client.authentication :as authenticate]
-            [auth-client.header-token-scheme :as ht]
-            [clojure.tools.logging :as log]))
+            [auth-client.header-token-scheme :as ht]))
 
 (use-fixtures :once fixtures/use-fake-http-calls)
 
 (def token "secret")
-
 (def token-store (ht/token-store token))
 (def authenticator (ht/authenticator token-store))
 
@@ -23,5 +21,5 @@
 
 (deftest token-is-added-to-authenticated-request
   (is (-> @(http/get http-client "http://example.com" {:authenticate? true})
-          (get-in [:opts :headers #_"Authentication"])
+          (get-in [:opts :headers "Authentication"])
           (= token))))

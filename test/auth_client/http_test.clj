@@ -9,8 +9,7 @@
 (def http-client (http/client))
 
 (deftest can-make-synchronous-http-calls-by-derefing-returned-promise
-  (is (= 200 (-> (http/get http-client "http://example.com")
-                 deref
+  (is (= 200 (-> @(http/get http-client "http://example.com")
                  :status))))
 
 (deftest can-make-async-calls-with-a-callback

@@ -31,8 +31,10 @@
                     [http-client url & [callback]])}
      ~'[http-client url & [s1 s2]]
      (if (or (instance? clojure.lang.MultiFn ~'s1) (fn? ~'s1) (keyword? ~'s1))
-       (request ~'http-client {:url ~'url :method ~(keyword method)} ~'s1)
-       (request ~'http-client (merge ~'s1 {:url ~'url :method ~(keyword method)}) ~'s2))))
+       (proto/request ~'http-client {:url ~'url :method ~(keyword method)} ~'s1)
+       (proto/request ~'http-client
+                      (merge ~'s1 {:url ~'url :method ~(keyword method)})
+                      ~'s2))))
 
 (defhttp get)
 (defhttp put)
