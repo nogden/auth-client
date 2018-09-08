@@ -20,7 +20,3 @@
     (is (= 200 (-> responses
                    async/<!!
                    :status)))))
-
-(deftest throws-on-authenticated-request-with-no-authenticator
-  (is (thrown? clojure.lang.ExceptionInfo
-               (http/get http-client "http//example.com" {:authenticate? true}))))

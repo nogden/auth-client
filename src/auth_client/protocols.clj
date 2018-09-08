@@ -1,5 +1,9 @@
 (ns auth-client.protocols)
 
+(defprotocol AsyncHttpClient
+  "Something capable of performing async HTTP requests"
+  (request [this request callback] "See auth-client.http/request for details."))
+
 (defprotocol Authenticator
   "Adds authentication details to a request"
   (authenticated [this request] "An authenticated `request`"))

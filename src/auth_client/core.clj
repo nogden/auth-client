@@ -1,12 +1,16 @@
 (ns auth-client.core
-  (:require [auth-client.authentication :as auth]
-            [auth-client.http :as http]
-            [auth-client.protocols :refer :all]))
+  (:require [auth-client.http :as http]
+            [auth-client.authentication :as authentication]
+            [auth-client.retry :as retry]))
 
 (comment
-  (def token-store (auth/token-store))
+  (def token-store (header-token/token-store))
+  (def authenticator (header-token/authenticator token-store))
 
-  (def http-client (http/client :authenticator (auth/header-token-authenticator token-store)))
+  (def http-client
+    (-> (http/client {:request-timeout 5000})
+        (authentication/with authenticator)
+        (retry/with retry-policy)))
 
   (def auth-service (let [config {:url             "https://www.google.com"
                                   :ttl             10000
