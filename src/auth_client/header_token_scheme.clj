@@ -20,4 +20,5 @@
   (reify
     Authenticator
     (authenticated [this request]
-      (assoc-in request [:headers "Authentication"] (secret-for token-store request)))))
+      (assoc-in request [:headers "Authentication"]
+                (secret-for token-store request)))))
