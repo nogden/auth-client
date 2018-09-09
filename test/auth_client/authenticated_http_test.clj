@@ -1,25 +1,30 @@
-(ns auth-client.authenticated-http-test
+(ns auth-client.authentication-test
   (:require [clojure.test :refer :all]
             [auth-client.fixtures :as fixtures]
             [auth-client.http :as http]
             [auth-client.authentication :as authenticate]
-            [auth-client.header-token-scheme :as ht]))
+            [auth-client.protocols :as proto]))
+
+(def authenticator-called? (atom false))
 
 (use-fixtures :once fixtures/use-fake-http-calls)
+(use-fixtures :each (fn [f] (reset! authenticator-called? false) (f)))
 
-(def token "secret")
-(def token-store (ht/token-store token))
-(def authenticator (ht/authenticator token-store))
+(def authenticator
+  (reify
+    proto/Authenticator
+    (proto/authenticated [this request]
+      (reset! authenticator-called? true)
+      request)))
 
-(def http-client (-> (http/client)
-                     (authenticate/with authenticator)))
+(def http-client
+  (-> (http/client)
+      (authenticate/with authenticator)))
 
-(deftest token-is-not-added-to-regular-requests
-  (is (-> @(http/get http-client "http://example.com")
-          (get-in [:opts :headers "Authentication"] :auth-header-not-present)
-          (= :auth-header-not-present))))
+(deftest authenticator-is-not-inkoked-for-normal-calls
+  @(http/get http-client "http://example.com")
+  (is (false? @authenticator-called?)))
 
-(deftest token-is-added-to-authenticated-request
-  (is (-> @(http/get http-client "http://example.com" {:authenticate? true})
-          (get-in [:opts :headers "Authentication"])
-          (= token))))
+(deftest authenticator-is-inkoked-for-authenticated-calls
+  @(http/get http-client "http://example.com" {:authenticate? true})
+  (is (true? @authenticator-called?)))
