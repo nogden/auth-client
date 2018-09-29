@@ -1,4 +1,4 @@
-(ns auth-client.protocols)
+(ns async-http.protocols)
 
 (defprotocol AsyncHttpClient
   "Something capable of performing async HTTP requests"

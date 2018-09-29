@@ -1,9 +1,9 @@
-(ns auth-client.authentication-test
+(ns async-http.authenticated-http-test
   (:require [clojure.test :refer :all]
-            [auth-client.fixtures :as fixtures]
-            [auth-client.http :as http]
-            [auth-client.authentication :as authenticate]
-            [auth-client.protocols :as proto]))
+            [async-http.fixtures :as fixtures]
+            [async-http.http :as http]
+            [async-http.authentication :as authenticate]
+            [async-http.protocols :as proto]))
 
 (def authenticator-called? (atom false))
 

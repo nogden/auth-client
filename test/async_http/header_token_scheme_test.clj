@@ -1,10 +1,10 @@
-(ns auth-client.header-token-scheme-test
-  (:require [auth-client.header-token-scheme :as sut]
+(ns async-http.header-token-scheme-test
+  (:require [async-http.header-token-scheme :as sut]
             [clojure.test :refer :all]
-            [auth-client.fixtures :as fixtures]
-            [auth-client.http :as http]
-            [auth-client.authentication :as authenticate]
-            [auth-client.header-token-scheme :as ht]))
+            [async-http.fixtures :as fixtures]
+            [async-http.http :as http]
+            [async-http.authentication :as authenticate]
+            [async-http.header-token-scheme :as ht]))
 
 (use-fixtures :once fixtures/use-fake-http-calls)
 

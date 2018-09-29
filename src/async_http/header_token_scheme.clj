@@ -1,6 +1,6 @@
-(ns auth-client.header-token-scheme
+(ns async-http.header-token-scheme
   "Authentication via token in http headers"
-  (:require [auth-client.protocols :refer :all]))
+  (:require [async-http.protocols :refer :all]))
 
 (defn token-store
   "A place to store authentication tokens."

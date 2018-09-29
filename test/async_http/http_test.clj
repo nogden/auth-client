@@ -1,7 +1,7 @@
-(ns auth-client.http-test
+(ns async-http.http-test
   (:require [clojure.test :refer :all]
-            [auth-client.fixtures :as fixtures]
-            [auth-client.http :as http]
+            [async-http.fixtures :as fixtures]
+            [async-http.http :as http]
             [clojure.core.async :as async]))
 
 (use-fixtures :once fixtures/use-fake-http-calls)

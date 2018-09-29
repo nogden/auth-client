@@ -1,4 +1,4 @@
-(ns auth-client.fixtures
+(ns async-http.fixtures
   (:require [org.httpkit.fake :as fake]))
 
 (defn use-fake-http-calls [test]

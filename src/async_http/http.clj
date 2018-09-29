@@ -1,9 +1,9 @@
-(ns auth-client.http
+(ns async-http.http
   "An extensible, asynchronous HTTP client"
   (:refer-clojure :exclude [get])
   (:require [clojure.string :as string]
             [org.httpkit.client :as http]
-            [auth-client.protocols :as proto]))
+            [async-http.protocols :as proto]))
 
 (defn request
   "Asyncronously issues `request`, using `http-client` and returns a

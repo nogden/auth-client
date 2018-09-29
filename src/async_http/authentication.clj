@@ -1,7 +1,7 @@
-(ns auth-client.authentication
+(ns async-http.authentication
   "Authenticated requests and secret management"
-  (:require [auth-client.http :as http]
-            [auth-client.protocols :as proto]
+  (:require [async-http.http :as http]
+            [async-http.protocols :as proto]
             [clojure.core.async :as async]
             [clojure.tools.logging :as log]))
 
