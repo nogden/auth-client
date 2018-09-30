@@ -9,8 +9,7 @@
   "Adds to `http-client` the ability to send authenticated
   requests. Authentication is provided by `authenticator`."
   [http-client authenticator]
-  (reify
-    proto/AsyncHttpClient
+  (reify proto/AsyncHttpClient
     (proto/request [this {:keys [authenticate?] :as request} callback]
       (proto/request http-client
                      (if authenticate?

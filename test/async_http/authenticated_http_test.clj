@@ -11,8 +11,7 @@
 (use-fixtures :each (fn [f] (reset! authenticator-called? false) (f)))
 
 (def authenticator
-  (reify
-    proto/Authenticator
+  (reify proto/Authenticator
     (proto/authenticated [this request]
       (reset! authenticator-called? true)
       request)))

@@ -17,8 +17,7 @@
   for all requests in which overrides are not specified."
   ([] (client {}))
   ([{:keys [] :as default-opts}]
-   (reify
-     proto/AsyncHttpClient
+   (reify proto/AsyncHttpClient
      (proto/request [this request callback]
        (http/request (merge default-opts request) callback)))))
 

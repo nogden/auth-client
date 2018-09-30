@@ -17,8 +17,7 @@
   "An authenticator that will add a HTTP `Authentication` header
   to each request with a secret token."
   [token-store]
-  (reify
-    Authenticator
+  (reify Authenticator
     (authenticated [this request]
       (assoc-in request [:headers "Authentication"]
                 (secret-for token-store request)))))
